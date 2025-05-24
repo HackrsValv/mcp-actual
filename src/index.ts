@@ -1,16 +1,20 @@
-import { createServer, ToolDefinition } from "@modelcontextprotocol/mcp";
-import axios from "axios";
+import { createServer, ToolDefinition } from "./mcp";
+declare const process: any;
 
 const API_URL = process.env.ACTUAL_API_URL!;
 const API_KEY = process.env.ACTUAL_API_KEY!;
 const PORT = parseInt(process.env.MCP_SERVER_PORT || "5005", 10);
 
-async function callActual(path: string, params = {}) {
-  const res = await axios.get(`${API_URL}/${path}`, {
+async function callActual(path: string, params: Record<string, any> = {}) {
+  const url = new URL(`${API_URL}/${path}`);
+  for (const [key, value] of Object.entries(params)) {
+    url.searchParams.set(key, String(value));
+  }
+
+  const res = await fetch(url, {
     headers: { "X-API-Key": API_KEY },
-    params,
   });
-  return res.data;
+  return res.json();
 }
 
 const tools: ToolDefinition[] = [
@@ -32,6 +36,16 @@ const tools: ToolDefinition[] = [
     run: async ({ query }) => {
       const data = await callActual("transactions", { q: query });
       return data.items;
+    }
+  },
+  {
+    name: "getAccounts",
+    description: "Returns a list of accounts",
+    inputs: {},
+    output: { type: "array", items: { type: "object" } },
+    run: async () => {
+      const data = await callActual("accounts");
+      return data.items || data;
     }
   }
 ];
