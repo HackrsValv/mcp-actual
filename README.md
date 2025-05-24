@@ -36,6 +36,20 @@ npm start
 
 The server listens on `MCP_SERVER_PORT` (5005 by default).
 
+## Running tests
+
+The project includes a small test suite. Run it using `npm`:
+
+```bash
+npm test
+```
+
+Alternatively you can use `make`:
+
+```bash
+make tests
+```
+
 ### Docker
 
 Alternatively you can build and run the container image:
