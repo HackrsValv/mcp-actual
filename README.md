@@ -7,6 +7,8 @@ MCP clients:
 - `getNetWorth` – returns the current net worth in cents.
 - `getTransactions` – searches transactions using a query string.
 
+This project targets **Node.js 20** or later.
+
 ## Environment variables
 
 The server expects the following environment variables:
@@ -19,7 +21,7 @@ The server expects the following environment variables:
 
 ## Building and running
 
-Install dependencies and compile the TypeScript sources:
+Install dependencies and compile the TypeScript sources (Node 20 recommended):
 
 ```bash
 npm install
