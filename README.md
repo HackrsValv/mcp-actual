@@ -61,3 +61,35 @@ podman run -p 5005:5005 \
   -e ACTUAL_API_KEY=secret \
   mcp-actual-server
 ```
+
+The container image is automatically built by GitHub Actions and published to
+the GitHub Container Registry. You can pull it without building locally:
+
+```bash
+docker pull ghcr.io/your-username/mcp-actual-server:latest
+```
+When replacing `your-username`, use your GitHub username in lowercase because
+GHCR repository names must be lowercase.
+
+### Docker Compose
+
+You can also run the server using `docker compose`:
+
+```yaml
+version: "3"
+services:
+  mcp-actual:
+    image: ghcr.io/your-username/mcp-actual-server:latest
+    ports:
+      - "5005:5005"
+    environment:
+      ACTUAL_API_URL: http://your-actual:5006
+      ACTUAL_API_KEY: secret
+      MCP_SERVER_PORT: 5005
+```
+
+Start the service with:
+
+```bash
+docker compose up
+```
