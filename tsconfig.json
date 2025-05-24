@@ -1,0 +1,11 @@
+
+// Create this file in mcp-actual/tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "strict": true,
+    "outDir": "dist"
+  },
+  "include": ["src"]
+}
