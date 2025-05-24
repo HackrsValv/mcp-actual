@@ -33,6 +33,16 @@ const tools: ToolDefinition[] = [
       const data = await callActual("transactions", { q: query });
       return data.items;
     }
+  },
+  {
+    name: "getAccounts",
+    description: "Returns a list of accounts",
+    inputs: {},
+    output: { type: "array", items: { type: "object" } },
+    run: async () => {
+      const data = await callActual("accounts");
+      return data.items || data;
+    }
   }
 ];
 
