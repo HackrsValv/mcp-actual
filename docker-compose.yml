@@ -1,0 +1,10 @@
+version: "3"
+services:
+  mcp-actual:
+    image: ghcr.io/your-username/mcp-actual-server:latest
+    ports:
+      - "5005:5005"
+    environment:
+      ACTUAL_API_URL: http://your-actual:5006
+      ACTUAL_API_KEY: secret
+      MCP_SERVER_PORT: 5005
